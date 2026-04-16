@@ -1,6 +1,12 @@
+import userService from "../service/user-service.js";
+
 class UserController{
     async registration(req,res,next){
         try{
+            const {email,password} = req.body
+            const userData = await userService.registration(email,password)
+            res.cookie("refreshtoken", userData.refreshToken,{maxAge:30*24*60*60*1000})
+            return
 
 
         }catch(e){
@@ -31,6 +37,9 @@ class UserController{
     }
     async activate(req,res,next){
         try{
+            const activationLink= req.params.link 
+            await userService.activate(activationLink)
+            return res.redict(process.env.API_CLIENT)
 
 
         }catch(e){

@@ -9,4 +9,4 @@ const tokenModel = new Schema({
 
 })
 
-export default model("User",tokenModelModel)
+export default model("User",tokenModel)
